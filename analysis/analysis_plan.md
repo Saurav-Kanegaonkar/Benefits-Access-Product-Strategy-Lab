@@ -1,6 +1,7 @@
 # Analysis Plan
 
-1. Aggregate daily metrics at client journey grain.
-2. Join events and action candidates to find high-risk operating segments.
-3. Rank the queue by risk, quality, and estimated impact.
-4. Convert the top issues into stakeholder-ready recommendations.
+1. Model the client intake, lawyer matching, evidence readiness, and case collaboration workflows at product-decision grain.
+2. Generate synthetic stakeholder evidence, PRD requirements, weekly operating metrics, and experiment plans.
+3. Score each workflow using strategic fit, request volume, evidence severity, marketplace friction, data quality, modeled opportunity, and effort.
+4. Convert the highest-priority workflow into a PRD slice with acceptance criteria, instrumentation, and validation plan.
+5. Review launch readiness gates before committing roadmap capacity.

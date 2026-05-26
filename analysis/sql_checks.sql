@@ -1,17 +1,17 @@
--- Priority queue foundation
-select
-  entity_id,
-  avg(risk_score) as avg_risk_score,
-  avg(quality_score) as avg_quality_score,
-  sum(value_pool) as value_pool
-from daily_metrics
-group by 1
-order by avg_risk_score desc;
+-- Roadmap priority review
+select workflow_id, workflow, priority_score, launch_status, next_decision
+from roadmap_queue
+order by priority_score desc
+limit 10;
 
--- Action readiness
-select
-  action_type,
-  avg(expected_lift_pct) as expected_lift,
-  avg(effort_hours) as effort_hours
-from recommended_actions
-group by 1;
+-- PRD requirements needing review
+select requirement_id, workflow_id, severity, evidence_source, prd_status
+from prd_cards
+where severity in ('High', 'Critical')
+order by request_count desc;
+
+-- Launch gates below threshold
+select workflow_id, workflow, readiness_score, weakest_gate, owner_team
+from readiness_register
+where readiness_score < 72
+order by readiness_score asc;

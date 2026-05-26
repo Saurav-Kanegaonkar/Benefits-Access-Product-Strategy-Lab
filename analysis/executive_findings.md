@@ -2,14 +2,14 @@
 
 ## What I analyzed
 
-I joined 5,040 daily metric rows, 760 source events, and 220 action candidates for benefits access product strategy, intake journeys, and lawyer matching.
+I generated and scored 10 benefits access product workflows, 30 PRD requirements, 60 stakeholder evidence events, and 120 weekly operating rows.
 
 ## Findings
 
-- The highest-priority client journey is CLI004 with a priority score of 110.19.
-- The top queue combines 53.4 average risk with 79.6 quality score and $987,559 estimated impact.
-- The strongest use case is turning repeated stakeholder questions into a ranked operating digest.
+- The highest-priority roadmap bet is Best-fit law firm recommendation with a priority score of 119.1.
+- The top workflow combines 97 evidence-backed requests, 54% average match acceptance, and $575,941 modeled opportunity.
+- The weakest launch gate for the top workflow is Data instrumentation, which makes cross-functional alignment the next product-management task.
 
 ## Recommendation
 
-Prioritize the top queue before scaling more dashboards. The project should help leaders decide which client journey risks need action, validation, or monitoring.
+Use the roadmap queue to select one PRD slice, close the weakest launch gate, and run the linked experiment before broad rollout.

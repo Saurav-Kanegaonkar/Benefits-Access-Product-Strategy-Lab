@@ -1,0 +1,61 @@
+event_id,workflow_id,event_type,source,severity,estimated_clients_affected,estimated_impact,note
+EV-BA001-1,BA001,Support escalation,Intake funnel telemetry,High,624,23207,Repeated uncertainty during intake handoff.
+EV-BA001-2,BA001,Experiment idea,Partner firm interview,Critical,122,144060,"Metric was tracked, but not actionable for roadmap review."
+EV-BA001-3,BA001,Support escalation,Client advocate interview,High,520,80423,Repeated uncertainty during intake handoff.
+EV-BA001-4,BA001,User friction,Intake funnel telemetry,High,289,125886,Client needed clearer plain-language guidance.
+EV-BA001-5,BA001,Policy risk,Legal ops policy review,Medium,1159,115016,Repeated uncertainty during intake handoff.
+EV-BA001-6,BA001,Support escalation,Legal ops policy review,High,2034,87349,Routing rule did not reflect current capacity.
+EV-BA002-1,BA002,Firm feedback,Partner firm interview,Critical,896,95328,"Metric was tracked, but not actionable for roadmap review."
+EV-BA002-2,BA002,Support escalation,Intake funnel telemetry,Critical,1884,24963,Client needed clearer plain-language guidance.
+EV-BA002-3,BA002,Firm feedback,Legal ops policy review,Medium,2116,22005,Firm preference mismatch created extra advocate work.
+EV-BA002-4,BA002,Firm feedback,Legal ops policy review,High,1435,70697,"Metric was tracked, but not actionable for roadmap review."
+EV-BA002-5,BA002,Policy risk,Legal ops policy review,High,293,51232,"Metric was tracked, but not actionable for roadmap review."
+EV-BA002-6,BA002,User friction,Legal ops policy review,Medium,1294,131926,Routing rule did not reflect current capacity.
+EV-BA003-1,BA003,Experiment idea,Intake funnel telemetry,High,1771,101765,Repeated uncertainty during intake handoff.
+EV-BA003-2,BA003,Firm feedback,Client advocate interview,Medium,264,58693,"Metric was tracked, but not actionable for roadmap review."
+EV-BA003-3,BA003,Policy risk,Legal ops policy review,Medium,1482,141832,Client needed clearer plain-language guidance.
+EV-BA003-4,BA003,Support escalation,Legal ops policy review,Critical,790,84250,Firm preference mismatch created extra advocate work.
+EV-BA003-5,BA003,Data gap,Intake funnel telemetry,High,2161,25942,Client needed clearer plain-language guidance.
+EV-BA003-6,BA003,Policy risk,Intake funnel telemetry,Medium,589,71080,"Metric was tracked, but not actionable for roadmap review."
+EV-BA004-1,BA004,User friction,Partner firm interview,High,1649,27518,Firm preference mismatch created extra advocate work.
+EV-BA004-2,BA004,Policy risk,Partner firm interview,High,1139,107437,Routing rule did not reflect current capacity.
+EV-BA004-3,BA004,Firm feedback,Intake funnel telemetry,Medium,460,67976,Firm preference mismatch created extra advocate work.
+EV-BA004-4,BA004,Firm feedback,Legal ops policy review,High,1717,112261,Firm preference mismatch created extra advocate work.
+EV-BA004-5,BA004,Support escalation,Partner firm interview,Critical,365,137678,Routing rule did not reflect current capacity.
+EV-BA004-6,BA004,Experiment idea,Legal ops policy review,High,848,141050,Routing rule did not reflect current capacity.
+EV-BA005-1,BA005,Policy risk,Partner firm interview,High,834,92187,Repeated uncertainty during intake handoff.
+EV-BA005-2,BA005,Firm feedback,Legal ops policy review,High,965,83386,Firm preference mismatch created extra advocate work.
+EV-BA005-3,BA005,Experiment idea,Partner firm interview,Medium,1303,38971,Routing rule did not reflect current capacity.
+EV-BA005-4,BA005,Firm feedback,Client advocate interview,High,1926,42467,Client needed clearer plain-language guidance.
+EV-BA005-5,BA005,Experiment idea,Client advocate interview,Critical,211,33354,Repeated uncertainty during intake handoff.
+EV-BA005-6,BA005,Data gap,Legal ops policy review,High,2027,122694,Client needed clearer plain-language guidance.
+EV-BA006-1,BA006,Policy risk,Legal ops policy review,Critical,330,40710,Routing rule did not reflect current capacity.
+EV-BA006-2,BA006,Experiment idea,Partner firm interview,Medium,1639,95592,Repeated uncertainty during intake handoff.
+EV-BA006-3,BA006,Policy risk,Client advocate interview,High,959,112186,Client needed clearer plain-language guidance.
+EV-BA006-4,BA006,Experiment idea,Client advocate interview,Medium,1961,22366,"Metric was tracked, but not actionable for roadmap review."
+EV-BA006-5,BA006,Data gap,Client advocate interview,High,343,55489,Client needed clearer plain-language guidance.
+EV-BA006-6,BA006,Data gap,Partner firm interview,Medium,1168,84330,Repeated uncertainty during intake handoff.
+EV-BA007-1,BA007,Firm feedback,Intake funnel telemetry,High,1662,71766,Client needed clearer plain-language guidance.
+EV-BA007-2,BA007,Firm feedback,Legal ops policy review,High,1032,41174,Firm preference mismatch created extra advocate work.
+EV-BA007-3,BA007,Firm feedback,Intake funnel telemetry,High,2155,115286,"Metric was tracked, but not actionable for roadmap review."
+EV-BA007-4,BA007,User friction,Partner firm interview,High,1829,21339,Routing rule did not reflect current capacity.
+EV-BA007-5,BA007,User friction,Partner firm interview,High,1284,28582,Repeated uncertainty during intake handoff.
+EV-BA007-6,BA007,Firm feedback,Client advocate interview,Medium,648,78352,Client needed clearer plain-language guidance.
+EV-BA008-1,BA008,Support escalation,Intake funnel telemetry,Medium,682,105677,"Metric was tracked, but not actionable for roadmap review."
+EV-BA008-2,BA008,Support escalation,Intake funnel telemetry,Critical,1047,117651,Repeated uncertainty during intake handoff.
+EV-BA008-3,BA008,Firm feedback,Client advocate interview,Medium,1973,44349,Firm preference mismatch created extra advocate work.
+EV-BA008-4,BA008,Data gap,Partner firm interview,High,231,79052,Routing rule did not reflect current capacity.
+EV-BA008-5,BA008,Data gap,Support transcript review,Critical,583,125775,Firm preference mismatch created extra advocate work.
+EV-BA008-6,BA008,Support escalation,Partner firm interview,Critical,465,62469,"Metric was tracked, but not actionable for roadmap review."
+EV-BA009-1,BA009,Support escalation,Client advocate interview,High,540,99156,"Metric was tracked, but not actionable for roadmap review."
+EV-BA009-2,BA009,Firm feedback,Intake funnel telemetry,High,378,28654,Routing rule did not reflect current capacity.
+EV-BA009-3,BA009,Data gap,Support transcript review,Medium,323,143071,Repeated uncertainty during intake handoff.
+EV-BA009-4,BA009,Data gap,Client advocate interview,Critical,2020,64853,Firm preference mismatch created extra advocate work.
+EV-BA009-5,BA009,Policy risk,Support transcript review,Medium,1654,59530,Repeated uncertainty during intake handoff.
+EV-BA009-6,BA009,Support escalation,Intake funnel telemetry,Medium,1180,79333,Repeated uncertainty during intake handoff.
+EV-BA010-1,BA010,Experiment idea,Intake funnel telemetry,High,1056,61220,Routing rule did not reflect current capacity.
+EV-BA010-2,BA010,Firm feedback,Partner firm interview,High,730,96266,Firm preference mismatch created extra advocate work.
+EV-BA010-3,BA010,Support escalation,Intake funnel telemetry,Medium,982,49944,Repeated uncertainty during intake handoff.
+EV-BA010-4,BA010,Data gap,Partner firm interview,High,726,39852,Repeated uncertainty during intake handoff.
+EV-BA010-5,BA010,Data gap,Intake funnel telemetry,Medium,754,129479,Routing rule did not reflect current capacity.
+EV-BA010-6,BA010,User friction,Support transcript review,Critical,751,49169,"Metric was tracked, but not actionable for roadmap review."

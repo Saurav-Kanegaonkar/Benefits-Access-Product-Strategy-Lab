@@ -6,24 +6,106 @@
   <title>Benefits Access Product Strategy Lab</title>
   <link rel="stylesheet" href="src/styles.css">
 </head>
-<body class="ai-discovery" style="--accent:#a16207;--bg:#fff7ed">
-  <main class="ai-shell">
-    <header class="ai-hero">
-      <p>AI product discovery studio</p>
-      <h1>Benefits Access Product Strategy Lab</h1>
-      <span>Blends interview evidence, community feedback, product telemetry, competitive research, and prompt-test notes into PRD-ready choices.</span>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Benefits access product strategy</p>
+        <h1>Roadmap decisions for intake, matching, and case collaboration</h1>
+        <p class="dek">A product-management workbench that turns client needs, law-firm constraints, operating telemetry, and launch gates into PRD-ready choices.</p>
+      </div>
+      <aside class="hero-decision" id="heroDecision"></aside>
     </header>
-    <section class="prd-grid">
-      <article class="memo"><b>01</b><h2>User Pull</h2><p>Power users want faster ideation, but community threads show low tolerance for black-box creative controls.</p></article>
-      <article class="memo"><b>02</b><h2>Edge Cases</h2><p>Prompt ambiguity, asset ownership, and revision memory are the highest-risk requirements before launch.</p></article>
-      <article class="memo"><b>03</b><h2>Roadmap Bet</h2><p>Ship a narrow feedback loop around saved prompts before expanding into a broader creative workflow suite.</p></article>
+
+    <section class="metrics" id="metricGrid" aria-label="Summary metrics"></section>
+
+    <nav class="tabs" aria-label="Workbench surfaces">
+      <button class="active" type="button" data-surface="roadmap">Roadmap queue</button>
+      <button type="button" data-surface="prd">PRD builder</button>
+      <button type="button" data-surface="experiment">Experiment loop</button>
+    </nav>
+
+    <section class="surface active" id="roadmapSurface">
+      <div class="surface-heading">
+        <div>
+          <p class="eyebrow">Surface 01</p>
+          <h2>Roadmap Priority Queue</h2>
+        </div>
+        <p>Ranks product bets by strategic fit, user evidence, marketplace friction, launch readiness, data quality, and implementation effort.</p>
+      </div>
+      <div class="split">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Workflow</th>
+                <th>Status</th>
+                <th>Score</th>
+                <th>Requests</th>
+                <th>Impact</th>
+                <th>Owner</th>
+              </tr>
+            </thead>
+            <tbody id="roadmapRows"></tbody>
+          </table>
+        </div>
+        <aside class="detail-panel" id="roadmapDetail"></aside>
+      </div>
     </section>
-    <section class="experiment-wall">
-      <h2>Launch Readout</h2>
-      <div><span>Activation lift</span><strong>+20%</strong></div>
-      <div><span>Escalation risk</span><strong>-21%</strong></div>
-      <div><span>Research hours</span><strong>-18</strong></div>
+
+    <section class="surface" id="prdSurface">
+      <div class="surface-heading">
+        <div>
+          <p class="eyebrow">Surface 02</p>
+          <h2>PRD Builder</h2>
+        </div>
+        <p>Converts ranked evidence into user stories, acceptance criteria, instrumentation, and validation plans for the selected roadmap slice.</p>
+      </div>
+      <div class="split">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Requirement</th>
+                <th>Persona</th>
+                <th>Severity</th>
+                <th>Evidence</th>
+                <th>Metric</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="prdRows"></tbody>
+          </table>
+        </div>
+        <aside class="detail-panel" id="prdDetail"></aside>
+      </div>
+    </section>
+
+    <section class="surface" id="experimentSurface">
+      <div class="surface-heading">
+        <div>
+          <p class="eyebrow">Surface 03</p>
+          <h2>Experiment And Launch Loop</h2>
+        </div>
+        <p>Pairs each PRD slice with a test design and launch gate review so the roadmap can move from opinion to measurable learning.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Workflow</th>
+              <th>Primary metric</th>
+              <th>Sample plan</th>
+              <th>Lift</th>
+              <th>Decision rule</th>
+            </tr>
+          </thead>
+          <tbody id="experimentRows"></tbody>
+        </table>
+      </div>
+      <div class="gate-grid" id="gateCards"></div>
     </section>
   </main>
+  <script src="src/app.js"></script>
 </body>
 </html>

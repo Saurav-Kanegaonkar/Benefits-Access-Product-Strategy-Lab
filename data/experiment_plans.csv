@@ -1,0 +1,11 @@
+experiment_id,workflow_id,hypothesis,primary_metric,guardrail_metric,sample_plan,minimum_detectable_lift,decision_rule
+EXP-BA001,BA001,A transparent matching rubric will raise accepted matches while reducing rework for advocates and firms.,client_trust_score,complaint_rate,Firm cohort,6%,Hold if legal review exceptions increase.
+EXP-BA002,BA002,A guided repair loop can improve qualification precision without making intake feel bureaucratic.,manual_rework_rate,legal_review_hold_rate,Geo split,5%,Iterate if lift appears only in one case type.
+EXP-BA003,BA003,"A triage queue that combines urgency, readiness, and outreach history will improve first-contact speed.",client_trust_score,legal_review_hold_rate,Advocate-team rollout,6%,Iterate if lift appears only in one case type.
+EXP-BA004,BA004,A recovery path with alternate routing and capacity alerts will prevent viable clients from dropping out.,client_trust_score,support_reopen_rate,Geo split,10%,Ship if primary metric improves and guardrail is flat.
+EXP-BA005,BA005,Lightweight firm-side capacity signals will improve match acceptance and reduce dead-end referrals.,case_readiness_score,legal_review_hold_rate,Firm cohort,5%,Ship if primary metric improves and guardrail is flat.
+EXP-BA006,BA006,A plain-language checklist will raise case readiness and reduce repeated advocate follow-up.,match_acceptance_rate,support_reopen_rate,Matched cohort,9%,Iterate if lift appears only in one case type.
+EXP-BA007,BA007,A structured handoff timeline will improve client confidence and firm follow-through.,case_readiness_score,legal_review_hold_rate,Matched cohort,6%,Hold if legal review exceptions increase.
+EXP-BA008,BA008,Milestone visibility will reduce avoidable support contacts and improve trust through long waits.,case_readiness_score,legal_review_hold_rate,Geo split,9%,Ship if primary metric improves and guardrail is flat.
+EXP-BA009,BA009,A vertical-specific readiness checklist can validate expansion demand before deeper workflow investment.,manual_rework_rate,complaint_rate,Geo split,5%,Ship if primary metric improves and guardrail is flat.
+EXP-BA010,BA010,State-specific guardrails can reduce mismatches while preserving a simple intake journey.,case_readiness_score,support_reopen_rate,Matched cohort,14%,Ship if primary metric improves and guardrail is flat.

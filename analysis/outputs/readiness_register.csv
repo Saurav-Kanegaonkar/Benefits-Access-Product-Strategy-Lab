@@ -1,0 +1,11 @@
+workflow_id,workflow,product_area,launch_status,readiness_score,weakest_gate,second_gate,owner_team,next_decision
+BA008,Milestone status tracker,Case collaboration,Discovery first,63.4,Operations playbook,Data instrumentation,Product and Engineering,Run focused discovery before roadmap commitment.
+BA010,State-specific routing guardrails,Workers compensation,Discovery first,66.6,Problem framing,Operations playbook,Product and Legal Ops,Run focused discovery before roadmap commitment.
+BA009,VA benefits evidence checklist,New verticals,Needs one gate,67.2,Experiment plan,Engineering estimate,New Verticals,Close the weakest gate before committing roadmap capacity.
+BA005,Firm capacity and preference signal,Lawyer network,Needs one gate,67.6,PRD completeness,Operations playbook,Lawyer Network,Close the weakest gate before committing roadmap capacity.
+BA003,Advocate triage command queue,Client operations,Needs one gate,69.7,Problem framing,Legal review,Client Experience,Close the weakest gate before committing roadmap capacity.
+BA001,Best-fit law firm recommendation,Lawyer matching,Needs one gate,70.2,Data instrumentation,Operations playbook,Product and Data Science,Close the weakest gate before committing roadmap capacity.
+BA004,No-match recovery path,Marketplace health,Needs one gate,70.9,Operations playbook,Legal review,Product Operations,Close the weakest gate before committing roadmap capacity.
+BA007,Post-match client handoff,Case collaboration,Needs one gate,71.0,Design prototype,Legal review,Product and Design,Close the weakest gate before committing roadmap capacity.
+BA006,Document readiness coach,Evidence readiness,Needs one gate,71.8,Legal review,Design prototype,Product and Legal Ops,Close the weakest gate before committing roadmap capacity.
+BA002,Eligibility quiz repair loop,Intake,Needs one gate,73.4,Legal review,Design prototype,Product and Design,Close the weakest gate before committing roadmap capacity.
