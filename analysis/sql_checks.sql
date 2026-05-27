@@ -15,3 +15,9 @@ select workflow_id, workflow, readiness_score, weakest_gate, owner_team
 from readiness_register
 where readiness_score < 72
 order by readiness_score asc;
+
+-- Data-platform contracts needing launch attention
+select workflow_id, workflow, contract_name, source_domain, decision_confidence, launch_blocker
+from platform_readiness
+where launch_blocker <> 'None'
+order by decision_confidence asc;

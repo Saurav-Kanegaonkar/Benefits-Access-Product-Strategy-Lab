@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Benefits Access Product Strategy Lab</title>
-  <link rel="stylesheet" href="src/styles.css">
+  <link rel="stylesheet" href="src/styles.css?v=20260527">
 </head>
 <body>
   <main class="shell">
@@ -12,7 +12,7 @@
       <div>
         <p class="eyebrow">Benefits access product strategy</p>
         <h1>Roadmap decisions for intake, matching, and case collaboration</h1>
-        <p class="dek">A product-management workbench that turns client needs, law-firm constraints, operating telemetry, and launch gates into PRD-ready choices.</p>
+        <p class="dek">A product-management workbench that turns client needs, law-firm constraints, operating telemetry, data contracts, and launch gates into PRD-ready choices.</p>
       </div>
       <aside class="hero-decision" id="heroDecision"></aside>
     </header>
@@ -23,6 +23,7 @@
       <button class="active" type="button" data-surface="roadmap">Roadmap queue</button>
       <button type="button" data-surface="prd">PRD builder</button>
       <button type="button" data-surface="experiment">Experiment loop</button>
+      <button type="button" data-surface="platform">Data platform</button>
     </nav>
 
     <section class="surface active" id="roadmapSurface">
@@ -105,7 +106,33 @@
       </div>
       <div class="gate-grid" id="gateCards"></div>
     </section>
+
+    <section class="surface" id="platformSurface">
+      <div class="surface-heading">
+        <div>
+          <p class="eyebrow">Surface 04</p>
+          <h2>Data Platform Model</h2>
+        </div>
+        <p>Reviews source-domain contracts, public benchmark context, model-decision confidence, and launch blockers before a roadmap bet is scaled.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Workflow</th>
+              <th>Source domain</th>
+              <th>Freshness</th>
+              <th>Confidence</th>
+              <th>Model action</th>
+              <th>Blocker</th>
+            </tr>
+          </thead>
+          <tbody id="platformRows"></tbody>
+        </table>
+      </div>
+      <div class="benchmark-grid" id="benchmarkCards"></div>
+    </section>
   </main>
-  <script src="src/app.js"></script>
+  <script src="src/app.js?v=20260527"></script>
 </body>
 </html>

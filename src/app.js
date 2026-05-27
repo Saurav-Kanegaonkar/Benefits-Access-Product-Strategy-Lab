@@ -29,8 +29,8 @@ function renderSummary() {
   document.querySelector("#metricGrid").innerHTML = [
     metric("Product bets", summary.workflow_count, "roadmap candidates"),
     metric("PRD inputs", summary.requirement_count, "evidence-backed requirements"),
-    metric("Modeled opportunity", currency.format(summary.modeled_impact), "synthetic impact proxy"),
-    metric("Ready to size", summary.ready_to_size, "after gate review"),
+    metric("Data contracts", summary.data_contract_count, "platform readiness checks"),
+    metric("Launch blockers", summary.platform_blockers, "data or model gaps"),
   ].join("");
 
   document.querySelector("#heroDecision").innerHTML = `
@@ -160,6 +160,38 @@ function renderExperiment() {
     .join("");
 }
 
+function renderPlatform() {
+  const rows = state.payload.platformReadiness;
+  const benchmarks = state.payload.publicBenchmarks;
+
+  document.querySelector("#platformRows").innerHTML = rows
+    .map((row) => `
+      <tr>
+        <td>
+          ${row.workflow}
+          <small>${row.contract_name}</small>
+        </td>
+        <td>${row.source_domain}<small>${row.required_fields}</small></td>
+        <td>${row.freshness_sla_hours}h<small>${Math.round(row.missingness_rate * 100)}% missingness</small></td>
+        <td>${Math.round(row.decision_confidence * 100)}%</td>
+        <td>${row.model_action}</td>
+        <td>${pill(row.launch_blocker)}</td>
+      </tr>
+    `)
+    .join("");
+
+  document.querySelector("#benchmarkCards").innerHTML = benchmarks
+    .map((row) => `
+      <article class="benchmark-card">
+        <span>${row.source}</span>
+        <strong>${row.metric}</strong>
+        <em>${row.benchmark_value}</em>
+        <p>${row.use_in_artifact}</p>
+      </article>
+    `)
+    .join("");
+}
+
 function setSurface(surface) {
   state.surface = surface;
   document.querySelectorAll("[data-surface]").forEach((button) => {
@@ -191,10 +223,11 @@ async function init() {
   renderRoadmap();
   renderPrd();
   renderExperiment();
+  renderPlatform();
   bindEvents();
 
   const requestedSurface = new URLSearchParams(window.location.search).get("surface");
-  if (["roadmap", "prd", "experiment"].includes(requestedSurface)) {
+  if (["roadmap", "prd", "experiment", "platform"].includes(requestedSurface)) {
     setSurface(requestedSurface);
   }
 }

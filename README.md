@@ -1,8 +1,8 @@
 # Benefits Access Product Strategy Lab
 
-An interactive product-management artifact for a benefits access and legal-help marketplace. It turns client intake needs, law-firm capacity constraints, stakeholder evidence, product telemetry, PRD requirements, and launch gates into a roadmap decision packet.
+An interactive product-management artifact for a benefits access and legal-help marketplace. It turns client intake needs, law-firm capacity constraints, stakeholder evidence, product telemetry, data-platform readiness, PRD requirements, and launch gates into a roadmap decision packet.
 
-This is not a generic dashboard. It is a compact workbench for deciding which intake, matching, or case-collaboration problem should move from discovery to PRD, what requirements belong in that PRD, and how the launch should be measured.
+This is not a generic dashboard. It is a compact workbench for deciding which intake, matching, or case-collaboration problem should move from discovery to PRD, what requirements belong in that PRD, which data contracts must be trusted, and how the launch should be measured.
 
 ## Screenshots
 
@@ -18,12 +18,17 @@ This is not a generic dashboard. It is a compact workbench for deciding which in
 
 **Experiment and launch loop:** pairs each PRD slice with a test design, primary metric, sample plan, decision rule, and launch gate review.
 
+![Data platform model](docs/images/platform.png)
+
+**Data platform model:** reviews source-domain contracts, public benchmark context, model-decision confidence, freshness, missingness, and blockers before a roadmap bet is scaled.
+
 ## What This Demonstrates
 
 - Product strategy: prioritizes roadmap bets across intake, lawyer matching, evidence readiness, and case collaboration.
 - PRD writing: translates user and partner evidence into user stories, acceptance criteria, instrumentation, and validation plans.
 - Marketplace judgment: accounts for client urgency, firm capacity, jurisdiction fit, response time, and trust.
 - Data fluency: uses transparent scoring and synthetic operating data to support roadmap tradeoffs.
+- Data-platform thinking: defines source contracts, freshness expectations, missingness checks, benchmark context, and model-decision confidence.
 - Launch discipline: connects every product bet to an experiment design and launch-readiness gate.
 
 ## Data
@@ -37,6 +42,7 @@ Generated source tables:
 - `data/weekly_operating_metrics.csv`: 120 weekly workflow metric rows with intake starts, qualification rate, match acceptance, firm response time, client trust, case readiness, and data quality.
 - `data/stakeholder_events.csv`: 60 synthetic evidence events shaped like user friction, partner firm feedback, support escalations, data gaps, policy risks, and experiment ideas.
 - `data/experiment_plans.csv`: 10 experiment plans with primary metric, guardrail metric, sample plan, minimum detectable lift, and decision rule.
+- `data/public_benchmarks.csv`: public context from Social Security Administration open data, SSA performance reporting, and GAO disability appeals research. These benchmarks are used as external context only, not as marketplace performance data.
 
 Synthetic assumptions:
 
@@ -45,6 +51,13 @@ Synthetic assumptions:
 - Data quality ranges from 62 to 96, with lower scores increasing launch risk.
 - Client trust ranges from 48 to 91, reflecting whether the product gives clear next steps during stressful legal or benefits journeys.
 - Roadmap scoring combines strategic fit, client-risk sensitivity, PRD request volume, evidence severity, stakeholder event impact, match acceptance, firm response time, data quality, and implementation effort.
+- Platform-readiness scoring adds data source domain, required-field contract, freshness SLA, missingness, model-decision confidence, public benchmark reference, and launch blocker.
+
+Public benchmark sources:
+
+- [SSA Open Data, combined disability processing time](https://www.ssa.gov/data/Combined-Disability-Processing-Time.html)
+- [SSA performance reporting](https://www.ssa.gov/ssa-performance)
+- [GAO disability appeals wait-time report](https://www.gao.gov/products/gao-20-641r)
 
 The data does not represent any real person, law firm, claim, client, employer, agency, insurer, or company performance.
 
@@ -54,6 +67,7 @@ The data does not represent any real person, law firm, claim, client, employer, 
 - `analysis/outputs/prd_cards.csv`: PRD slices used by the PRD Builder surface.
 - `analysis/outputs/experiment_readout.csv`: experiment and launch measurement plans.
 - `analysis/outputs/readiness_register.csv`: launch gate register by workflow.
+- `analysis/outputs/platform_readiness.csv`: source-contract and model-readiness register.
 - `analysis/outputs/app_payload.json`: frontend payload for the interactive workbench.
 - `analysis/executive_findings.md`: concise product readout.
 - `analysis/methodology.md`: scoring logic and synthetic-data methodology.
@@ -61,7 +75,7 @@ The data does not represent any real person, law firm, claim, client, employer, 
 
 ## Role Connection
 
-This artifact is designed for a product manager role that requires product vision, roadmap ownership, stakeholder alignment, hands-on data analysis, experimentation, and mission-driven judgment. It shows how to turn a complex consumer and partner marketplace into a clear product decision packet.
+This artifact is designed for a product manager role that requires product vision, roadmap ownership, stakeholder alignment, hands-on data analysis, experimentation, data-platform fluency, and mission-driven judgment. It shows how to turn a complex consumer and partner marketplace into a clear product decision packet.
 
 ## Scope
 
@@ -69,7 +83,7 @@ This artifact does:
 
 - Show how a product manager can structure discovery, PRD, marketplace, and launch-analysis work for a benefits access and legal-help product.
 - Use a transparent scoring model that can be explained in an interview.
-- Provide three distinct surfaces for roadmap prioritization, PRD creation, and experiment review.
+- Provide four distinct surfaces for roadmap prioritization, PRD creation, experiment review, and data-platform readiness.
 
 This artifact does not:
 
@@ -91,3 +105,4 @@ Deep links are available for each surface:
 - `http://localhost:4173/?surface=roadmap`
 - `http://localhost:4173/?surface=prd`
 - `http://localhost:4173/?surface=experiment`
+- `http://localhost:4173/?surface=platform`

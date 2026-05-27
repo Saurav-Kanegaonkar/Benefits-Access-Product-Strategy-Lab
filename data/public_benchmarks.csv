@@ -1,0 +1,4 @@
+benchmark_id,domain,metric,benchmark_value,source,use_in_artifact
+PUB-SSA-INITIAL,Disability determination,Initial disability claim processing time,Monthly elapsed-day benchmark,SSA Open Data,Sets external context for why intake completeness and evidence readiness matter.
+PUB-SSA-HEARING,Appeals and hearings,Hearing processing target,270 days,SSA performance reporting,Frames long-cycle trust and status transparency as product risks.
+PUB-GAO-APPEALS,Appeals hardship,Most appealed applicants waited more than one year for final decision in the study period,More than one year,GAO disability appeals report,Raises urgency weight for workflows that reduce avoidable delay.

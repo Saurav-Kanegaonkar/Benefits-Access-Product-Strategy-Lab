@@ -33,6 +33,8 @@
       "second_gate": "Operations playbook"
     },
     "ready_to_size": 0,
+    "data_contract_count": 7,
+    "platform_blockers": 3,
     "needs_one_gate": 8,
     "discovery_first": 2,
     "modeled_impact": 4665305
@@ -905,6 +907,174 @@
       "launch_status": "Discovery first",
       "priority_score": 96.9,
       "readiness_score": 66.6
+    }
+  ],
+  "platformReadiness": [
+    {
+      "workflow_id": "BA007",
+      "workflow": "Post-match client handoff",
+      "source_domain": "client_messages",
+      "contract_name": "Client message contract",
+      "required_fields": "channel, handoff_step, response_due_at, sentiment_signal",
+      "freshness_sla_hours": 48,
+      "missingness_rate": 0.229,
+      "decision_confidence": 0.71,
+      "model_action": "Personalize next best intake question",
+      "public_benchmark": "PUB-GAO-APPEALS",
+      "launch_blocker": "Freshness SLA",
+      "owner_team": "Product and Design"
+    },
+    {
+      "workflow_id": "BA008",
+      "workflow": "Milestone status tracker",
+      "source_domain": "client_messages",
+      "contract_name": "Client message contract",
+      "required_fields": "channel, handoff_step, response_due_at, sentiment_signal",
+      "freshness_sla_hours": 48,
+      "missingness_rate": 0.21,
+      "decision_confidence": 0.71,
+      "model_action": "Route to advocate review before referral",
+      "public_benchmark": "PUB-SSA-HEARING",
+      "launch_blocker": "Freshness SLA",
+      "owner_team": "Product and Engineering"
+    },
+    {
+      "workflow_id": "BA005",
+      "workflow": "Firm capacity and preference signal",
+      "source_domain": "lawyer_capacity",
+      "contract_name": "Firm capacity contract",
+      "required_fields": "state, practice_area, open_slots, response_sla_hours",
+      "freshness_sla_hours": 48,
+      "missingness_rate": 0.231,
+      "decision_confidence": 0.75,
+      "model_action": "Recommend lawyer match with rationale",
+      "public_benchmark": "PUB-SSA-HEARING",
+      "launch_blocker": "Freshness SLA",
+      "owner_team": "Lawyer Network"
+    },
+    {
+      "workflow_id": "BA010",
+      "workflow": "State-specific routing guardrails",
+      "source_domain": "public_benchmarks",
+      "contract_name": "Public benchmark contract",
+      "required_fields": "domain, metric, benchmark_value, source, updated_at",
+      "freshness_sla_hours": 24,
+      "missingness_rate": 0.206,
+      "decision_confidence": 0.71,
+      "model_action": "Escalate delayed handoff follow-up",
+      "public_benchmark": "PUB-SSA-INITIAL",
+      "launch_blocker": "None",
+      "owner_team": "Product and Legal Ops"
+    },
+    {
+      "workflow_id": "BA004",
+      "workflow": "No-match recovery path",
+      "source_domain": "case_outcomes",
+      "contract_name": "Outcome feedback contract",
+      "required_fields": "match_accepted, benefit_stage, payout_status, closed_reason",
+      "freshness_sla_hours": 4,
+      "missingness_rate": 0.235,
+      "decision_confidence": 0.72,
+      "model_action": "Escalate delayed handoff follow-up",
+      "public_benchmark": "PUB-SSA-HEARING",
+      "launch_blocker": "None",
+      "owner_team": "Product Operations"
+    },
+    {
+      "workflow_id": "BA009",
+      "workflow": "VA benefits evidence checklist",
+      "source_domain": "public_benchmarks",
+      "contract_name": "Public benchmark contract",
+      "required_fields": "domain, metric, benchmark_value, source, updated_at",
+      "freshness_sla_hours": 24,
+      "missingness_rate": 0.213,
+      "decision_confidence": 0.72,
+      "model_action": "Recommend lawyer match with rationale",
+      "public_benchmark": "PUB-SSA-INITIAL",
+      "launch_blocker": "None",
+      "owner_team": "New Verticals"
+    },
+    {
+      "workflow_id": "BA006",
+      "workflow": "Document readiness coach",
+      "source_domain": "claim_documents",
+      "contract_name": "Document evidence contract",
+      "required_fields": "document_type, freshness_days, completeness_score",
+      "freshness_sla_hours": 8,
+      "missingness_rate": 0.19,
+      "decision_confidence": 0.73,
+      "model_action": "Prompt evidence checklist completion",
+      "public_benchmark": "PUB-GAO-APPEALS",
+      "launch_blocker": "None",
+      "owner_team": "Product and Legal Ops"
+    },
+    {
+      "workflow_id": "BA003",
+      "workflow": "Advocate triage command queue",
+      "source_domain": "advocate_case_notes",
+      "contract_name": "Advocate disposition contract",
+      "required_fields": "workflow_id, urgency, next_step, review_reason",
+      "freshness_sla_hours": 2,
+      "missingness_rate": 0.23,
+      "decision_confidence": 0.74,
+      "model_action": "Prompt evidence checklist completion",
+      "public_benchmark": "PUB-SSA-INITIAL",
+      "launch_blocker": "None",
+      "owner_team": "Client Experience"
+    },
+    {
+      "workflow_id": "BA002",
+      "workflow": "Eligibility quiz repair loop",
+      "source_domain": "intake_quiz",
+      "contract_name": "Intake event contract",
+      "required_fields": "client_id, state, claim_type, answer_confidence, submitted_at",
+      "freshness_sla_hours": 12,
+      "missingness_rate": 0.208,
+      "decision_confidence": 0.77,
+      "model_action": "Route to advocate review before referral",
+      "public_benchmark": "PUB-GAO-APPEALS",
+      "launch_blocker": "None",
+      "owner_team": "Product and Design"
+    },
+    {
+      "workflow_id": "BA001",
+      "workflow": "Best-fit law firm recommendation",
+      "source_domain": "lawyer_capacity",
+      "contract_name": "Firm capacity contract",
+      "required_fields": "state, practice_area, open_slots, response_sla_hours",
+      "freshness_sla_hours": 8,
+      "missingness_rate": 0.184,
+      "decision_confidence": 0.81,
+      "model_action": "Personalize next best intake question",
+      "public_benchmark": "PUB-SSA-INITIAL",
+      "launch_blocker": "None",
+      "owner_team": "Product and Data Science"
+    }
+  ],
+  "publicBenchmarks": [
+    {
+      "benchmark_id": "PUB-SSA-INITIAL",
+      "domain": "Disability determination",
+      "metric": "Initial disability claim processing time",
+      "benchmark_value": "Monthly elapsed-day benchmark",
+      "source": "SSA Open Data",
+      "use_in_artifact": "Sets external context for why intake completeness and evidence readiness matter."
+    },
+    {
+      "benchmark_id": "PUB-SSA-HEARING",
+      "domain": "Appeals and hearings",
+      "metric": "Hearing processing target",
+      "benchmark_value": "270 days",
+      "source": "SSA performance reporting",
+      "use_in_artifact": "Frames long-cycle trust and status transparency as product risks."
+    },
+    {
+      "benchmark_id": "PUB-GAO-APPEALS",
+      "domain": "Appeals hardship",
+      "metric": "Most appealed applicants waited more than one year for final decision in the study period",
+      "benchmark_value": "More than one year",
+      "source": "GAO disability appeals report",
+      "use_in_artifact": "Raises urgency weight for workflows that reduce avoidable delay."
     }
   ],
   "stakeholderEvents": [

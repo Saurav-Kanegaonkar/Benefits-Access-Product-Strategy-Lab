@@ -32,6 +32,8 @@
     "second_gate": "Operations playbook"
   },
   "ready_to_size": 0,
+  "data_contract_count": 7,
+  "platform_blockers": 3,
   "needs_one_gate": 8,
   "discovery_first": 2,
   "modeled_impact": 4665305

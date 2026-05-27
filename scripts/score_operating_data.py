@@ -171,6 +171,41 @@ READINESS_GATES = [
     "Experiment plan",
 ]
 
+PUBLIC_BENCHMARKS = [
+    {
+        "benchmark_id": "PUB-SSA-INITIAL",
+        "domain": "Disability determination",
+        "metric": "Initial disability claim processing time",
+        "benchmark_value": "Monthly elapsed-day benchmark",
+        "source": "SSA Open Data",
+        "use_in_artifact": "Sets external context for why intake completeness and evidence readiness matter.",
+    },
+    {
+        "benchmark_id": "PUB-SSA-HEARING",
+        "domain": "Appeals and hearings",
+        "metric": "Hearing processing target",
+        "benchmark_value": "270 days",
+        "source": "SSA performance reporting",
+        "use_in_artifact": "Frames long-cycle trust and status transparency as product risks.",
+    },
+    {
+        "benchmark_id": "PUB-GAO-APPEALS",
+        "domain": "Appeals hardship",
+        "metric": "Most appealed applicants waited more than one year for final decision in the study period",
+        "benchmark_value": "More than one year",
+        "source": "GAO disability appeals report",
+        "use_in_artifact": "Raises urgency weight for workflows that reduce avoidable delay.",
+    },
+]
+
+MODEL_ACTIONS = [
+    "Personalize next best intake question",
+    "Recommend lawyer match with rationale",
+    "Route to advocate review before referral",
+    "Prompt evidence checklist completion",
+    "Escalate delayed handoff follow-up",
+]
+
 
 def write_csv(path, rows, fieldnames):
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -309,6 +344,64 @@ def build_experiments():
     return rows
 
 
+def build_platform_register(roadmap):
+    rows = []
+    contracts = {
+        "intake_quiz": ("Intake event contract", "client_id, state, claim_type, answer_confidence, submitted_at"),
+        "advocate_case_notes": ("Advocate disposition contract", "workflow_id, urgency, next_step, review_reason"),
+        "lawyer_capacity": ("Firm capacity contract", "state, practice_area, open_slots, response_sla_hours"),
+        "client_messages": ("Client message contract", "channel, handoff_step, response_due_at, sentiment_signal"),
+        "claim_documents": ("Document evidence contract", "document_type, freshness_days, completeness_score"),
+        "case_outcomes": ("Outcome feedback contract", "match_accepted, benefit_stage, payout_status, closed_reason"),
+        "public_benchmarks": ("Public benchmark contract", "domain, metric, benchmark_value, source, updated_at"),
+    }
+    source_by_area = {
+        "Lawyer matching": "lawyer_capacity",
+        "Intake": "intake_quiz",
+        "Client operations": "advocate_case_notes",
+        "Marketplace health": "case_outcomes",
+        "Lawyer network": "lawyer_capacity",
+        "Evidence readiness": "claim_documents",
+        "Case collaboration": "client_messages",
+        "New verticals": "public_benchmarks",
+        "Workers compensation": "public_benchmarks",
+    }
+    benchmark_cycle = [row["benchmark_id"] for row in PUBLIC_BENCHMARKS]
+    for index, workflow in enumerate(roadmap):
+        source_domain = source_by_area[workflow["product_area"]]
+        contract_name, required_fields = contracts[source_domain]
+        quality = float(workflow["avg_data_quality"])
+        freshness_hours = random.choice([2, 4, 8, 12, 24, 48])
+        missingness = round(clamp((100 - quality) / 130 + random.uniform(0.01, 0.07), 0.02, 0.28), 3)
+        decision_confidence = round(clamp(0.54 + workflow["priority_score"] / 260 - missingness, 0.45, 0.92), 2)
+        launch_blocker = "None"
+        if quality < 74:
+            launch_blocker = "Data quality remediation"
+        elif freshness_hours > 24:
+            launch_blocker = "Freshness SLA"
+        elif decision_confidence < 0.68:
+            launch_blocker = "Model confidence"
+
+        rows.append(
+            {
+                "workflow_id": workflow["workflow_id"],
+                "workflow": workflow["workflow"],
+                "source_domain": source_domain,
+                "contract_name": contract_name,
+                "required_fields": required_fields,
+                "freshness_sla_hours": freshness_hours,
+                "missingness_rate": missingness,
+                "decision_confidence": decision_confidence,
+                "model_action": MODEL_ACTIONS[index % len(MODEL_ACTIONS)],
+                "public_benchmark": benchmark_cycle[index % len(benchmark_cycle)],
+                "launch_blocker": launch_blocker,
+                "owner_team": workflow["owner_team"],
+            }
+        )
+    rows.sort(key=lambda row: (row["launch_blocker"] == "None", row["decision_confidence"]))
+    return rows
+
+
 def score_outputs(requirements, weekly_metrics, events, experiments):
     req_by_workflow = defaultdict(list)
     for row in requirements:
@@ -440,8 +533,9 @@ def score_outputs(requirements, weekly_metrics, events, experiments):
     return roadmap, prd_cards, readiness_rows, experiment_rows
 
 
-def write_markdown(summary, roadmap, prd_cards, readiness_rows):
+def write_markdown(summary, roadmap, prd_cards, readiness_rows, platform_rows):
     top = roadmap[0]
+    top_platform = platform_rows[0]
     (ROOT / "analysis" / "executive_findings.md").write_text(
         "\n".join(
             [
@@ -456,10 +550,11 @@ def write_markdown(summary, roadmap, prd_cards, readiness_rows):
                 f"- The highest-priority roadmap bet is {top['workflow']} with a priority score of {top['priority_score']}.",
                 f"- The top workflow combines {top['request_count']} evidence-backed requests, {top['avg_match_acceptance']:.0%} average match acceptance, and ${top['estimated_impact']:,} modeled opportunity.",
                 f"- The weakest launch gate for the top workflow is {top['weakest_gate']}, which makes cross-functional alignment the next product-management task.",
+                f"- The highest-risk data-platform contract is {top_platform['contract_name']} for {top_platform['workflow']}, with {top_platform['decision_confidence']:.0%} model-decision confidence.",
                 "",
                 "## Recommendation",
                 "",
-                "Use the roadmap queue to select one PRD slice, close the weakest launch gate, and run the linked experiment before broad rollout.",
+                "Use the roadmap queue to select one PRD slice, close the weakest launch gate, verify the data contract, and run the linked experiment before broad rollout.",
                 "",
             ]
         )
@@ -474,7 +569,8 @@ def write_markdown(summary, roadmap, prd_cards, readiness_rows):
                 "2. Generate synthetic stakeholder evidence, PRD requirements, weekly operating metrics, and experiment plans.",
                 "3. Score each workflow using strategic fit, request volume, evidence severity, marketplace friction, data quality, modeled opportunity, and effort.",
                 "4. Convert the highest-priority workflow into a PRD slice with acceptance criteria, instrumentation, and validation plan.",
-                "5. Review launch readiness gates before committing roadmap capacity.",
+                "5. Review data contracts, freshness, missingness, public benchmark context, and model-decision confidence before committing roadmap capacity.",
+                "6. Review launch readiness gates before scaling the experiment.",
                 "",
             ]
         )
@@ -490,6 +586,8 @@ def write_markdown(summary, roadmap, prd_cards, readiness_rows):
                 "The scoring model combines strategic fit, client-risk sensitivity, PRD request volume, critical requirement count, stakeholder event impact, match acceptance, firm response time, data quality, and implementation effort.",
                 "",
                 "Synthetic distributions use bounded random draws around realistic product operating ranges: match acceptance from 35% to 78%, firm response from 8 to 72 hours, data quality from 62 to 96, and client trust from 48 to 91.",
+                "",
+                "The data-platform register adds source-domain freshness, required-field completeness, missingness, and model-decision confidence. Public benchmarks from SSA and GAO are used only as contextual anchors for wait-time and appeals risk, not as company performance claims.",
                 "",
                 "The data does not represent any real person, law firm, claim, client, employer, agency, insurer, or company performance.",
                 "",
@@ -518,6 +616,12 @@ def write_markdown(summary, roadmap, prd_cards, readiness_rows):
                 "where readiness_score < 72",
                 "order by readiness_score asc;",
                 "",
+                "-- Data-platform contracts needing launch attention",
+                "select workflow_id, workflow, contract_name, source_domain, decision_confidence, launch_blocker",
+                "from platform_readiness",
+                "where launch_blocker <> 'None'",
+                "order by decision_confidence asc;",
+                "",
             ]
         )
     )
@@ -531,21 +635,25 @@ def main():
     events = build_events()
     experiments = build_experiments()
     roadmap, prd_cards, readiness_rows, experiment_rows = score_outputs(requirements, weekly_metrics, events, experiments)
+    platform_rows = build_platform_register(roadmap)
 
     write_csv(DATA / "product_workflows.csv", WORKFLOWS, list(WORKFLOWS[0].keys()))
     write_csv(DATA / "prd_requirements.csv", requirements, list(requirements[0].keys()))
     write_csv(DATA / "weekly_operating_metrics.csv", weekly_metrics, list(weekly_metrics[0].keys()))
     write_csv(DATA / "stakeholder_events.csv", events, list(events[0].keys()))
     write_csv(DATA / "experiment_plans.csv", experiments, list(experiments[0].keys()))
+    write_csv(DATA / "public_benchmarks.csv", PUBLIC_BENCHMARKS, list(PUBLIC_BENCHMARKS[0].keys()))
 
     roadmap_fields = list(roadmap[0].keys())
     prd_fields = list(prd_cards[0].keys())
     readiness_fields = list(readiness_rows[0].keys())
     experiment_fields = list(experiment_rows[0].keys())
+    platform_fields = list(platform_rows[0].keys())
     write_csv(OUTPUTS / "roadmap_queue.csv", roadmap, roadmap_fields)
     write_csv(OUTPUTS / "prd_cards.csv", prd_cards, prd_fields)
     write_csv(OUTPUTS / "readiness_register.csv", readiness_rows, readiness_fields)
     write_csv(OUTPUTS / "experiment_readout.csv", experiment_rows, experiment_fields)
+    write_csv(OUTPUTS / "platform_readiness.csv", platform_rows, platform_fields)
 
     summary = {
         "workflow_count": len(WORKFLOWS),
@@ -555,6 +663,8 @@ def main():
         "experiment_count": len(experiments),
         "top_workflow": roadmap[0],
         "ready_to_size": sum(1 for row in roadmap if row["launch_status"] == "Ready to size"),
+        "data_contract_count": len({row["contract_name"] for row in platform_rows}),
+        "platform_blockers": sum(1 for row in platform_rows if row["launch_blocker"] != "None"),
         "needs_one_gate": sum(1 for row in roadmap if row["launch_status"] == "Needs one gate"),
         "discovery_first": sum(1 for row in roadmap if row["launch_status"] == "Discovery first"),
         "modeled_impact": sum(row["estimated_impact"] for row in roadmap),
@@ -567,11 +677,13 @@ def main():
         "prdCards": prd_cards,
         "readinessRegister": readiness_rows,
         "experimentReadout": experiment_rows,
+        "platformReadiness": platform_rows,
+        "publicBenchmarks": PUBLIC_BENCHMARKS,
         "stakeholderEvents": events,
     }
     (OUTPUTS / "summary.json").write_text(json.dumps(summary, indent=2))
     (OUTPUTS / "app_payload.json").write_text(json.dumps(payload, indent=2))
-    write_markdown(summary, roadmap, prd_cards, readiness_rows)
+    write_markdown(summary, roadmap, prd_cards, readiness_rows, platform_rows)
 
     print(f"Top workflow: {roadmap[0]['workflow']} ({roadmap[0]['priority_score']})")
     print(f"Launch status: {roadmap[0]['launch_status']}")
